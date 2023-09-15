@@ -1,3 +1,3 @@
-class Player < ApplicationRecord
+class Team < ApplicationRecord
   validates :name, presence: true
 end
