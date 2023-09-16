@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_16_152025) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_16_152822) do
   create_table "achievements", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -23,6 +23,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_16_152025) do
     t.integer "away_team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "performances", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.integer "achievement_id", null: false
+    t.integer "match_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["achievement_id"], name: "index_performances_on_achievement_id"
+    t.index ["match_id"], name: "index_performances_on_match_id"
+    t.index ["player_id"], name: "index_performances_on_player_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -41,5 +52,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_16_152025) do
 
   add_foreign_key "matches", "teams", column: "away_team_id"
   add_foreign_key "matches", "teams", column: "home_team_id"
+  add_foreign_key "performances", "achievements"
+  add_foreign_key "performances", "matches"
+  add_foreign_key "performances", "players"
   add_foreign_key "players", "teams"
 end
