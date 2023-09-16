@@ -3,5 +3,6 @@ class Player < ApplicationRecord
   has_many :performances, dependent: :destroy
   has_many :achievements, through: :performances
 
-  validates :name, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 end
