@@ -11,7 +11,7 @@ PLAYERS = [
   { first_name: 'Erling', last_name: 'Haaland' }
 ]
 
-ACHIEVEMENTS = [
+RESULTS = [
   'сделал 70+ % точных передач',
   'пробежал 10+ км'
 ]
@@ -43,11 +43,11 @@ end
 players = Player.all
 matches = Match.all
 
-ACHIEVEMENTS.each do |achievement|
-  new_achievement = Achievement.create(body: achievement)
+RESULTS.each do |result|
+  new_result = Result.create(body: result)
 
   players.each do |player|
     next if rand(0..2) == 0
-    new_achievement.reach_by(player, matches.sample)
+    new_result.reach_by(player, matches.sample)
   end
 end

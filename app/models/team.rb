@@ -6,6 +6,6 @@ class Team < ApplicationRecord
   validates :name, presence: true
 
   def matches
-    [home_matches, away_matches]
+    home_matches.concat(away_matches)
   end
 end

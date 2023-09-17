@@ -10,13 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_16_163551) do
-  create_table "achievements", force: :cascade do |t|
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_09_17_194602) do
   create_table "matches", force: :cascade do |t|
     t.datetime "match_date"
     t.integer "home_team_id"
@@ -27,13 +21,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_16_163551) do
 
   create_table "performances", force: :cascade do |t|
     t.integer "player_id", null: false
-    t.integer "achievement_id", null: false
+    t.integer "result_id", null: false
     t.integer "match_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["achievement_id"], name: "index_performances_on_achievement_id"
     t.index ["match_id"], name: "index_performances_on_match_id"
     t.index ["player_id"], name: "index_performances_on_player_id"
+    t.index ["result_id"], name: "index_performances_on_result_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -45,6 +39,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_16_163551) do
     t.index ["team_id"], name: "index_players_on_team_id"
   end
 
+  create_table "results", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -53,8 +53,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_16_163551) do
 
   add_foreign_key "matches", "teams", column: "away_team_id"
   add_foreign_key "matches", "teams", column: "home_team_id"
-  add_foreign_key "performances", "achievements"
   add_foreign_key "performances", "matches"
   add_foreign_key "performances", "players"
+  add_foreign_key "performances", "results"
   add_foreign_key "players", "teams"
 end
