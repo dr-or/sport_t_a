@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_17_194602) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_18_103025) do
   create_table "matches", force: :cascade do |t|
     t.datetime "match_date"
     t.integer "home_team_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_194602) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["match_id"], name: "index_performances_on_match_id"
+    t.index ["player_id", "result_id", "match_id"], name: "index_performances_on_player_id_and_result_id_and_match_id", unique: true
     t.index ["player_id"], name: "index_performances_on_player_id"
     t.index ["result_id"], name: "index_performances_on_result_id"
   end
@@ -43,6 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_194602) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["body"], name: "index_results_on_body", unique: true
   end
 
   create_table "teams", force: :cascade do |t|
