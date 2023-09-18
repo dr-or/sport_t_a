@@ -48,6 +48,6 @@ RESULTS.each do |result|
 
   players.each do |player|
     next if rand(0..2) == 0
-    new_result.achieve_by(player, matches.sample)
+    new_result.achieved_by(player, matches.sample)
   end
 end
