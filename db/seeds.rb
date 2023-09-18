@@ -46,8 +46,13 @@ matches = Match.all
 RESULTS.each do |result|
   new_result = Result.create(body: result)
 
-  players.each do |player|
+  shuffled_players = players.shuffle
+  result_count = PLAYERS.count * MATCH_COUNT
+
+  result_count.times do |i|
     next if rand(0..2) == 0
-    new_result.achieved_by(player, matches.sample)
+    player_index = i % PLAYERS.count
+    match_index = i / PLAYERS.count
+    new_result.achieved_by(shuffled_players[player_index], matches[match_index])
   end
 end

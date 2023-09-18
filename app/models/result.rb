@@ -14,7 +14,7 @@ class Result < ApplicationRecord
     players_w_result = self.players
                            .select('players.*, COUNT(*) AS players_count')
                            .group('players.id')
-                           .order(players_count: :desc)
+                           .order(players_count: :desc, id: :asc)
     
     return players_w_result.first(5).map(&:full_name) unless team
 
