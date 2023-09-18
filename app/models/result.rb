@@ -6,7 +6,7 @@ class Result < ApplicationRecord
 
   validates :body, presence: true, uniqueness: true
 
-  def reach_by(player, match)
+  def achieve_by(player, match)
     Performance.create(result: self, player: player, match: match)
   end
 
